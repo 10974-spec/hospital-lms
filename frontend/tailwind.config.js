@@ -8,10 +8,10 @@ export default {
     extend: {
       colors: {
         'primary': '#5f6FFF',
-        'secondary': '#ffffff',
-        'tertiary': '#f5f5f5',
-        'quaternary': '#e0e0e0',
-        'quinary': '#bdbdbd',
+        
+      },
+      gridTemplateColumns: {
+        'auto': 'repeat(auto-fill, minmax(200px, 1fr))',
       },
     },
   },
