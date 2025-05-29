@@ -24,9 +24,10 @@ const addDoctor = async (req, res) => {
         
         // validating password strength 
 
-        if (password.length) {
-            return res.status({success: false, message: 'Please Enter a strong password'});
-        }
+       if (password.length === 0) {
+    return res.status(400).json({ success: false, message: 'Please enter a strong password' });
+}
+
 
         // hashing password
 
