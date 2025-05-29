@@ -13,7 +13,7 @@ const addDoctor = async (req, res) => {
     //  checking for all data to add doctor 
 
         if (!name || !email || !password || !speciality || !degree || !experience || !about || !fees || !address || !imageFile) {
-            return res.status({success: false, message: 'All fields are required'});
+            return res.status(400)({success: false, message: 'All fields are required'});
         }
 
         //  validating email format 
@@ -104,4 +104,25 @@ const loginAdmin = async (req, res) => {
     }
 }
 
-export { addDoctor, loginAdmin };
+// API TO GET ALL THE DOCTORS FOR ADMIN PANEL
+
+const allDoctors = async (req, res) => {
+    try {
+        const doctors = await doctorModel.find({}).select('-password');
+        res.json({
+            success: true,
+            doctors,
+        })
+     
+
+
+    } catch (error) {
+        console.log(error);
+        res.json({
+            success: false,
+            message:error.message,
+        });
+    }
+}
+
+export { addDoctor, loginAdmin, allDoctors  };

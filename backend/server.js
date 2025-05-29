@@ -18,6 +18,7 @@ app.use(cors());
 
 // API ENDPOINTS
 app.use('/api/admin', adminRouter);
+
 // localhost:4000/api/admin/
 
 app.get('/', (req, res) => {
