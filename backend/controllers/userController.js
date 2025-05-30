@@ -122,4 +122,4 @@ const getProfile = async (req, res) => {
   }
 }
 
-export { registerUser, loginUser };
+export { registerUser, loginUser, getProfile };
