@@ -26,9 +26,10 @@ const registerUser = async (req, res) => {
     // validating password
 
     if (password.length < 8) {
-      return res
-       .status(400)
-       .json({ success: false, message: "Password must be at least 8 characters" });
+      return res.status(400).json({
+        success: false,
+        message: "Password must be at least 8 characters",
+      });
     }
 
     // hash password
@@ -39,27 +40,64 @@ const registerUser = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-    }
+    };
 
     // save user to db
 
     const newUser = new userModel(userData);
     const user = await newUser.save();
-    
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET)
+
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
     res.json({
       success: true,
       message: "User registered successfully",
       token,
-    })
-
+    });
   } catch (error) {
     console.log(error);
     res.json({
       success: false,
-      message:error.message,
+      message: error.message,
     });
   }
 };
 
-export { registerUser };
+// API FOR USER LOGIN
+
+const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await userModel.findOne({ email });
+
+    if (!user) {
+      res.json({
+        success: false,
+        message: "User does not exist",
+      });
+    }
+    // compare password
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (isMatch) {
+      const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+      res.json({
+        success: true,
+        message: "User logged in successfully",
+        token,
+      });
+    } else {
+      res.json({
+        success: false,
+        message: "Invalid credentials",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+export { registerUser, loginUser };
