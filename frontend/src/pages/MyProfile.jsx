@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/AppContext';
+import { assets } from '../assets/assets_frontend/assets';
 
 const MyProfile = () => {
 
@@ -14,9 +15,23 @@ const MyProfile = () => {
 
   }
 
+
   return userData && (
     <div className='max-w-lg  flex flex-col gap-2 text-sm'>
-      <img className='w-36 rounded' src={userData.image} alt="" />
+
+    {
+      isEdit
+      ? <label htmlFor="image">
+        <div>
+          <img src={image ? URL.createObjectURL(image): userData.image} alt="" />
+          <img src={image ? '': assets.upload_icon }/>
+        </div>
+        <input onChange={(e)=>setImage(e.target.files[0])} type="file" id="image" hidden/>
+      </label>
+      : <img className='w-36 rounded' src={userData.image} alt="" />
+    }
+
+     
       {
         isEdit
           ? <input className='  text-gray-500 text-center border border-gray-800 rounded text-sm  font-medium max-w-80 mt-4' type="text" value={userData.name} onChange={e => setUserData(prev = ({ ...prev, name: e.target.value }))} />
