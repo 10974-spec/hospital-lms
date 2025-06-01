@@ -258,6 +258,34 @@ const listAppointment = async (req, res) => {
     
   }catch(error){
     console.log(error);
+    res.json({
+      success: false,
+      message: error.message,
+    })
+  }
+}
+
+// API TO CANCEL APPOINTMENT
+
+const cancelAppointment = async (req, res) => {
+  try {
+    
+    const {appointmentId, userId} = req.body;
+    const appointmentData = await appointmentModel.findById(appointmentId);
+    if(appointmentData.userId !== userId){
+      return res.json({
+        success: false,
+        message: "You are not authorized to cancel this appointment",
+      })
+    }
+    await appointmentModel.findByIdAndUpdate(appointmentId, {cancelled:true});
+
+  }catch(error){
+    console.log(error);
+    res.json({
+      success: false,
+      message: error.message,
+    })
   }
 }
 
