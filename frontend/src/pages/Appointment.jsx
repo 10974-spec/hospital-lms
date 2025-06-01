@@ -88,15 +88,23 @@ const Appointment = () => {
 
       const slotDate = day + '-' + month + '-' + year;
       const {data} = await axios.post(backendUrl + '/api/user/book-appointment', {
-        doctorId: docId,
-        doctorInfo: docInfo,
-        date: slotDate,
-        time: slotTime,
-        token: token  
-      })
+         docId,
+         slotDate,
+         slotTime,
+         
+      }, {headers: {token}} )
+
+      if(data.success){
+        toast.success(data.message);
+        getDoctorsData()
+        navigate('/my-appointments')
+      }else{
+        toast.error(data.message);
+      }
 
     }catch(error){
-
+      console.log(error);
+      toast.error(error.message);
     }
   }
 
