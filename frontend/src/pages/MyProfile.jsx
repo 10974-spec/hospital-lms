@@ -12,7 +12,20 @@ const MyProfile = () => {
   const [image, setImage] = useState(false);
 
   const updateUserProfileData = async () => {
+    try{
+      const formData = new FormData();
 
+      formData.append('name', userData.name)
+      formData.append('phone', userData.phone)
+      formData.append('address', JSON.stringify(userData.address))
+      formData.append('gender', userData.gender)
+      formData.append('dob', userData.dob)
+
+      image && formData.append('image', image)
+
+    }catch{
+
+    }
   }
 
 
@@ -22,16 +35,15 @@ const MyProfile = () => {
     {
       isEdit
       ? <label htmlFor="image">
-        <div>
-          <img src={image ? URL.createObjectURL(image): userData.image} alt="" />
-          <img src={image ? '': assets.upload_icon }/>
+        <div className='inline-block relative cursor-pointer'>
+          <img className='w-36 rounded opacity-75' src={image ? URL.createObjectURL(image): userData.image} alt="" />
+          <img className='w-10 absolute bottom-12 right-12 ' src={image ? '': assets.upload_icon }/>
         </div>
         <input onChange={(e)=>setImage(e.target.files[0])} type="file" id="image" hidden/>
       </label>
       : <img className='w-36 rounded' src={userData.image} alt="" />
-    }
+    }  
 
-     
       {
         isEdit
           ? <input className='  text-gray-500 text-center border border-gray-800 rounded text-sm  font-medium max-w-80 mt-4' type="text" value={userData.name} onChange={e => setUserData(prev = ({ ...prev, name: e.target.value }))} />
@@ -89,7 +101,7 @@ const MyProfile = () => {
       <div className='mt-10'>
         {
           isEdit
-            ? <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300' onClick={() => setIsEdit(false)}>Save Information</button>
+            ? <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300' onClick={updateUserProfileData}>Save Information</button>
             : <button className='border border-primary px-8 py-2 rounded-full hover:bg-primary hover:text-white transition-all duration-300'  onClick={() => setIsEdit(true)}>Edit</button>
         }
       </div>
