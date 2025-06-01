@@ -280,6 +280,22 @@ const cancelAppointment = async (req, res) => {
     }
     await appointmentModel.findByIdAndUpdate(appointmentId, {cancelled:true});
 
+    // REMOVE SLOT FROM DOCTOR DATA
+    const {docId, slotDate, slotTime} = appointmentData;
+
+    const doctorData = await doctorModel.findById(docId);
+    let slots_booked = doctorData.slots_booked;
+
+    slots_booked[slotDate] = slots_booked[slotDate].filter(e => e !== slotTime);
+
+    await doctorModel.findByIdAndUpdate(docId, {
+      slots_booked,
+    })
+    res.json({
+      success: true,
+      message: "Appointment cancelled successfully",
+    })
+
   }catch(error){
     console.log(error);
     res.json({
