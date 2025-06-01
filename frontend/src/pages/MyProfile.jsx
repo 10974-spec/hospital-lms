@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { AppContext } from '../context/AppContext';
 import { assets } from '../assets/assets_frontend/assets';
+import axios from 'axios';
 
 const MyProfile = () => {
 
@@ -22,6 +23,8 @@ const MyProfile = () => {
       formData.append('dob', userData.dob)
 
       image && formData.append('image', image)
+
+      const {data} = await axios.put(backendUrl + '/api/user/update-profile', formData, {headers:{token}})
 
     }catch{
 
