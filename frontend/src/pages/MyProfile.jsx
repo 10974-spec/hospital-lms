@@ -1,25 +1,20 @@
-import React, { useState } from 'react'
-import { assets } from '../assets/assets_frontend/assets';
+import React, { useContext, useState } from 'react'
+import { AppContext } from '../context/AppContext';
 
 const MyProfile = () => {
 
-  const [userData, setUserData] = useState({
-    name: 'Emmanuel Nyakoe',
-    image: assets.profile_pic,
-    email: 'emmanuelnyakoe@gmail.com',
-    phone: '+254 752121244',
-    address: {
-      line1: '123 Main Street',
-      line2: 'Apartment 4B',
-    },
-    gender: 'Male',
-    dob: '01/01/1990',
+ 
 
-  })
+  const {userData, setUserData, token , backendUrl, loadUserProfileData } = useContext(AppContext)
 
   const [isEdit, setIsEdit] = useState(false);
+  const [image, setImage] = useState(false);
 
-  return (
+  const updateUserProfileData = async () => {
+
+  }
+
+  return userData && (
     <div className='max-w-lg  flex flex-col gap-2 text-sm'>
       <img className='w-36 rounded' src={userData.image} alt="" />
       {
