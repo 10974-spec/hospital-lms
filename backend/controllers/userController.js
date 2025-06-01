@@ -4,6 +4,7 @@ import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken";
 import {v2 as cloudinary} from 'cloudinary'
 import doctorModel from "../models/doctorModel.js";
+import appointmentModel from "../models/appointmentModel.js";
 
 // API TO REGISTER USER
 
@@ -203,9 +204,36 @@ const bookAppointment = async (req, res) => {
       slots_booked[slotDate].push(slotTime);
      }
     }else{
-      slots_booked[slotDate] = [slotTime];
+      slots_booked[slotDate] = [];
+      slots_booked[slotDate].push(slotTime);
     }
 
+    const userData = await userModel.findById(userId).select("-password");
+
+    delete docData.slots_booked;
+
+    const appointmentData = {
+      userId,
+      docId,
+      slotDate,
+      slotTime,
+      userData,
+      docData,
+      amount: docData.fees,
+      date: Date.now(),
+    };
+    const newAppointment = new appointmentModel(appointmentData);
+    await newAppointment.save();
+
+
+    // SAVE NEW SLOTS DATA IN DOCTORS DATA 
+    await doctorModel.findByIdAndUpdate(docId, {
+      slots_booked,
+    });
+    res.json({
+      success: true,
+      message: "Appointment booked successfully",
+    });
 
 
   }catch(error){
