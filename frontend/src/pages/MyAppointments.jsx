@@ -3,6 +3,7 @@ import { AppContext } from '../context/AppContext'
 import { useState } from 'react'
 import axios from 'axios'
 import { useEffect } from 'react'
+import { toast } from 'react-toastify'
 
 const MyAppointments = () => {
   const { backendUrl, token} = useContext(AppContext)
@@ -29,7 +30,26 @@ const MyAppointments = () => {
       }
     }catch (error) {
       console.log(error)
-      toath.error(error.message)
+      toast.error(error.message)
+    }
+  }
+
+  const cancelAppointment = async (appointmentId) => {
+    try {
+    const {data} = await axios.post(backendUrl + '/api/user/cancel-appointment', {
+      appointmentId
+    }, {headers: {token}})
+
+    if (data.success) {
+      getUserAppointments()
+      toast.success(data.message)
+    }else {
+      toast.error(data.message)
+    }
+     
+    }catch (error) {
+      console.log(error)
+      toast.error(error.message)
     }
   }
 
@@ -59,7 +79,7 @@ const MyAppointments = () => {
             <div></div>
             <div className='flex flex-col gap-2 justify-end'>
               <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-primary hover:text-white transition-all duration-300'>Pay Online</button>
-              <button className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel Appointment</button>
+              <button onClick={()=>cancelAppointment(item._id)} className='text-sm text-stone-500 text-center sm:min-w-48 py-2 border rounded hover:bg-red-600 hover:text-white transition-all duration-300'>Cancel Appointment</button>
             </div>
           </div>
         ))}
