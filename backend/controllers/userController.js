@@ -2,10 +2,10 @@ import validator from "validator";
 import bcrypt from "bcrypt";
 import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken";
-import {v2 as cloudinary} from 'cloudinary'
+import { v2 as cloudinary } from 'cloudinary'
 import doctorModel from "../models/doctorModel.js";
 import appointmentModel from "../models/appointmentModel.js";
-
+import razorpay from "razorpay";
 // API TO REGISTER USER
 
 const registerUser = async (req, res) => {
@@ -179,7 +179,7 @@ const updateProfile = async (req, res) => {
 
 const bookAppointment = async (req, res) => {
   try {
-    const { userId, docId, slotDate, slotTime,} = req.body;
+    const { userId, docId, slotDate, slotTime, } = req.body;
 
     const docData = await doctorModel.findById(docId).select("-password");
 
@@ -195,15 +195,15 @@ const bookAppointment = async (req, res) => {
     // checking for slots availability 
 
     if (slots_booked[slotDate]) {
-     if (slots_booked[slotDate].includes(slotTime)) {
-      return res.json({
-        success: false,
-        message: "Slot is not available",
-      });
-     } else{
-      slots_booked[slotDate].push(slotTime);
-     }
-    }else{
+      if (slots_booked[slotDate].includes(slotTime)) {
+        return res.json({
+          success: false,
+          message: "Slot is not available",
+        });
+      } else {
+        slots_booked[slotDate].push(slotTime);
+      }
+    } else {
       slots_booked[slotDate] = [];
       slots_booked[slotDate].push(slotTime);
     }
@@ -236,7 +236,7 @@ const bookAppointment = async (req, res) => {
     });
 
 
-  }catch(error){
+  } catch (error) {
     console.log(error);
     res.json({
       success: false,
@@ -249,14 +249,14 @@ const bookAppointment = async (req, res) => {
 const listAppointment = async (req, res) => {
   try {
 
-    const {userId} = req.body;
-    const appointments = await appointmentModel.find({userId});
+    const { userId } = req.body;
+    const appointments = await appointmentModel.find({ userId });
     res.json({
       success: true,
       appointments,
     });
-    
-  }catch(error){
+
+  } catch (error) {
     console.log(error);
     res.json({
       success: false,
@@ -269,19 +269,19 @@ const listAppointment = async (req, res) => {
 
 const cancelAppointment = async (req, res) => {
   try {
-    
-    const {appointmentId, userId} = req.body;
+
+    const { appointmentId, userId } = req.body;
     const appointmentData = await appointmentModel.findById(appointmentId);
-    if(appointmentData.userId !== userId){
+    if (appointmentData.userId !== userId) {
       return res.json({
         success: false,
         message: "You are not authorized to cancel this appointment",
       })
     }
-    await appointmentModel.findByIdAndUpdate(appointmentId, {cancelled:true});
+    await appointmentModel.findByIdAndUpdate(appointmentId, { cancelled: true });
 
     // REMOVE SLOT FROM DOCTOR DATA
-    const {docId, slotDate, slotTime} = appointmentData;
+    const { docId, slotDate, slotTime } = appointmentData;
 
     const doctorData = await doctorModel.findById(docId);
     let slots_booked = doctorData.slots_booked;
@@ -296,7 +296,7 @@ const cancelAppointment = async (req, res) => {
       message: "Appointment cancelled successfully",
     })
 
-  }catch(error){
+  } catch (error) {
     console.log(error);
     res.json({
       success: false,
@@ -305,4 +305,52 @@ const cancelAppointment = async (req, res) => {
   }
 }
 
-export { registerUser, loginUser, getProfile, updateProfile , bookAppointment, listAppointment, cancelAppointment};
+const razorpayInstance = new razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET,
+})
+
+
+// API to make payment of appointment using razorpay 
+
+const paymentRazorpay = async (req, res) => {
+
+  try {
+    c
+    const { appointmentId } = req.body;
+    const appointmentData = await appointmentModel.findById(appointmentId);
+
+
+    if (!appointmentData || appointmentData.cancelled) {
+      return res.json({
+        success: false,
+        message: "Appointment does not exist",
+      })
+    }
+
+    // creating options for razor pay payment 
+    const options = {
+      amount: appointmentData.amount * 100,
+      currency: process.env.CURRENCY,
+      receipt: appointmentId,
+    }
+
+    // creating order for razor pay payment
+    const order = await razorpayInstance.orders.create(options);
+    res.json({
+      success: true,
+      order,
+    })
+
+  }
+  catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: error.message,
+    })
+  }
+}
+
+
+export { registerUser, loginUser, getProfile, updateProfile, bookAppointment, listAppointment, cancelAppointment, paymentRazorpay };
