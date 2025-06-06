@@ -188,7 +188,16 @@ const adminDashboard = async (req, res )=> {
     try {
 
         const doctors = await doctorModel.find({})
-        const users = await userModel
+        const users = await userModel.find({})
+        const appointments = await appointmentModel.find({})
+
+        const dashData = {
+            doctors: doctors.length,
+            appointments: appointments.length,
+            patients: users.length,
+            latestAppointments: appointments.reverse().slice(0,5)
+        }
+        res.json({success:true, dashData})
 
     }catch (error){
         console.log(error)
@@ -196,4 +205,4 @@ const adminDashboard = async (req, res )=> {
     }
 }
 
-export { addDoctor, loginAdmin, allDoctors, appointmentsAdmin, appointmentCancel  };
+export { addDoctor, loginAdmin, allDoctors, appointmentsAdmin, appointmentCancel, adminDashboard  };

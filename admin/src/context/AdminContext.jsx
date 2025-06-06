@@ -10,6 +10,7 @@ const AdminContextProvider = (props) => {
   );
   const [doctors, setDoctors] = useState([]);
   const [appointments, setAppointments] = useState([]);
+  const [dashData, setDashData] = useState(false)
 
   const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
@@ -34,18 +35,18 @@ const AdminContextProvider = (props) => {
 
   const changeAvailability = async (docId) => {
     try {
-        const { data } = await axios.post(
-            backendUrl + "/api/admin/change-availability",
-            { docId },
-            { headers: { atoken: aToken } }
-          
-        );
-        if (data.success){
-            toast.success(data.message);
-            getAllDoctors();
-        } else {
-            toast.error(data.message);
-        }
+      const { data } = await axios.post(
+        backendUrl + "/api/admin/change-availability",
+        { docId },
+        { headers: { atoken: aToken } }
+
+      );
+      if (data.success) {
+        toast.success(data.message);
+        getAllDoctors();
+      } else {
+        toast.error(data.message);
+      }
 
     } catch (error) {
       toast.error(error.message);
@@ -62,29 +63,42 @@ const AdminContextProvider = (props) => {
       if (data.success) {
         setAppointments(data.appointments);
         console.log(data.appointments);
-        
+
       } else {
         toast.error(data.message);
       }
-      
-    }catch (error) {
+
+    } catch (error) {
       toast.error(error.message);
     }
   }
 
   const cancelAppointment = async (appointmentId) => {
-    try{
-      const {data} = await axios.post(backendUrl+ '/api/admin/cancel-appointment', {appointmentId},{headers: {aToken}})
+    try {
+      const { data } = await axios.post(backendUrl + '/api/admin/cancel-appointment', { appointmentId }, { headers: { aToken } })
 
-      if (data.success){
+      if (data.success) {
         toast.success(data.message)
         getAllAppointments()
-      }else {
+      } else {
         toast.error(data.message)
       }
 
-    }catch(error) {
+    } catch (error) {
       toast.error(error.message)
+    }
+  }
+
+  const getDashData = async () => {
+    try {
+      const { data } = await axios.get(backendUrl + '/api/admin/dashboard', { headers: { aToken } })
+      if (data.success) {
+        setDashData(data.dashData)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(data.message)
     }
   }
 
@@ -98,7 +112,9 @@ const AdminContextProvider = (props) => {
     changeAvailability,
     getAllAppointments,
     appointments,
-    cancelAppointment
+    cancelAppointment,
+    dashData,
+    getDashData
   };
 
   return (
