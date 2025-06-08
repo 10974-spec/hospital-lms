@@ -211,4 +211,29 @@ const doctorDashboard = async (req, res) => {
   }
 }
 
+//  API TO GET DOCTOR PROFILE FOR DOCTOR PANEL 
+
+const doctorProfile = async (req, res) => {
+  try {
+
+    const {docId} = req.body
+    const profileData = await doctorModel.findById(docId).select("-password")
+
+    res.json({
+      success: true,
+      profileData
+    })
+
+  } catch (error) {
+    console.log(error);
+    res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+}
+
+
+// API TO UPDATE DOCTOR PROFILE
+
 export { changeAvailability, doctorList, loginDoctor, appointmentsDoctor, appointmentComplete, appointmentCancel, doctorDashboard };
