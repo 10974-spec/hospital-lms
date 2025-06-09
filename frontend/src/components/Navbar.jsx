@@ -40,6 +40,7 @@ const Navbar = () => {
           <li className='py-1'>CONTACT</li>
           <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden' />
         </NavLink>
+        <button  className='border px-2.5 py-0.5 rounded-full border-gray-500 text-gray-600'>Admin Panel</button>
       </ul>
       <div className='flex item-center gap-4'>
         {
