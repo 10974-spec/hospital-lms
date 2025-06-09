@@ -1,13 +1,40 @@
 import React, { useContext, useEffect, useState } from "react";
 import { DoctorContext } from "../../context/DoctorContext";
 import { AppContext } from "../../context/AppContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const DoctorProfile = () => {
   const { dToken, profileData, getProfileData, setProfileData } =
     useContext(DoctorContext);
   const { currency, backendUrl } = useContext(AppContext);
+    useEffect(() => {
+    console.log("Current backendUrl:", backendUrl);
+  }, []);
 
   const [isEdit, setIsEdit] = useState(false);
+
+  const updateProfile = async () => {
+    try {
+     const updateData = {
+       fees: profileData.fees,
+       available: profileData.available,
+       address: profileData.address
+     }
+     const {data} = await axios.put(backendUrl + '/api/doctor/update-profile', updateData, {headers:{dToken}})
+     if(data.success){
+      toast.success(data.message)
+      setIsEdit(false)
+      getProfileData()
+     } else {
+      toast.error(data.message)
+     }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  }
 
   useEffect(() => {
     if (dToken) {
@@ -92,7 +119,7 @@ const DoctorProfile = () => {
             {
               isEdit 
               ?     <button 
-              onClick={() => setIsEdit(false)} 
+              onClick={updateProfile} 
               className="px-4 py-1 border border-primary text-sm rounded-full mt-5 cursor-pointer hover:bg-primary hover:text-white transition-all duration-300"
             >Save</button>
             :         
