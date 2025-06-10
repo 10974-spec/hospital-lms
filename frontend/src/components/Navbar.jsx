@@ -78,12 +78,13 @@ const Navbar = () => {
          onClick={()=>setShowMenu(false)} to="/about"><p className="px-4 py-2 rounded inline-block">ABOUT</p></NavLink>
         <NavLink 
          onClick={()=>setShowMenu(false)} to="/contact"><p className="px-4 py-2 rounded inline-block">CONTACT</p></NavLink>
-      </ul>
-            <button className='border px-2.5 py-0.5 rounded-full border-gray-500 text-gray-600'>
+                   <button className='border px-2.5 py-0.5 rounded-full border-gray-500 text-gray-600'>
   <a href="https://medicare-admin-6lu9.onrender.com" target="_blank" rel="noopener noreferrer">
     Admin Panel
   </a>
 </button>
+      </ul>
+ 
     </div>
       </div>
     </div>
