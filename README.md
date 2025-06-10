@@ -1,6 +1,6 @@
 # 🏥 MediCare - Doctor Appointment System (MERN Stack)
 
-![App Screenshot](/client/public/screenshot.png) <!-- Replace with your actual screenshot path -->
+![App Screenshot](/readme-images/banner.png)<!-- Replace with your actual screenshot path -->
 
 A full-featured medical booking platform with patient/doctor portals, admin dashboard, and appointment management.
 
