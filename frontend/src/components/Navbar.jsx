@@ -40,7 +40,11 @@ const Navbar = () => {
           <li className='py-1'>CONTACT</li>
           <hr className='border-none outline-none h-0.5 bg-primary w-3/5 m-auto hidden' />
         </NavLink>
-        <button  className='border px-2.5 py-0.5 rounded-full border-gray-500 text-gray-600'><a href="https://medicare-admin-6lu9.onrender.com">Admin Panel</a></button>
+      <button className='border px-2.5 py-0.5 rounded-full border-gray-500 text-gray-600'>
+  <a href="https://medicare-admin-6lu9.onrender.com" target="_blank" rel="noopener noreferrer">
+    Admin Panel
+  </a>
+</button>
       </ul>
       <div className='flex item-center gap-4'>
         {
