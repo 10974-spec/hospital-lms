@@ -40,8 +40,8 @@ A full-featured medical booking platform with patient/doctor portals, admin dash
 ### Setup Instructions
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/medi-care.git
-   cd medi-care
+   git clone https://github.com/10974-spec/medicare.git
+   cd medicare
 # Frontend
 cd frontend - npm install
 
