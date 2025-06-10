@@ -42,4 +42,13 @@ A full-featured medical booking platform with patient/doctor portals, admin dash
    ```bash
    git clone https://github.com/yourusername/medi-care.git
    cd medi-care
+# Frontend
+cd frontend - npm install
+
+# Backend
+cd backend - npm install
+
+# Admin
+cd admin - npm install
+   
 
