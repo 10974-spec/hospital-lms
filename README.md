@@ -42,22 +42,4 @@ A full-featured medical booking platform with patient/doctor portals, admin dash
    ```bash
    git clone https://github.com/yourusername/medi-care.git
    cd medi-care
-📂 Project Structure
 
-📦 medi-care
-├── 📂 backend           # Node.js/Express
-│   ├── config/         # DB, auth, etc. configs
-│   ├── controllers/    # Route handlers
-│   ├── middleware/     # Auth, validation
-│   ├── models/         # MongoDB schemas
-│   ├── routes/         # API endpoints
-│   ├── utils/          # Helpers (email, SMS, etc.)
-│   └── server.js       # Entry point
-│
-├── 📂 frontend         # Patient-facing (Vite + React)
-│   ├── public/         # Static assets
-│   └── src/            # All React code here
-│
-└── 📂 admin            # Admin panel (Vite + React)
-    ├── public/         # Static assets
-    └── src/            # All React code here
