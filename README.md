@@ -58,13 +58,21 @@ A full-featured medical booking platform with patient/doctor portals, admin dash
    ```bash
    git clone https://github.com/10974-spec/medicare.git
    cd medicare
-# Frontend
-cd frontend - npm install
+   
+## ⚙️ Installation
 
-# Backend
-cd backend - npm install
+### 🌐 **Frontend**
+```bash
+cd frontend && npm install
 
-# Admin
-cd admin - npm install
+🖥️ Backend
+
+cd backend && npm install
+
+🔐 Admin
+
+cd admin && npm install
+
+
    
 
