@@ -73,7 +73,7 @@ cd backend && npm install
 🔐 Admin
 
 cd admin && npm install
-
+```
 
 ## 🔐 Environment Variables Setup
 
