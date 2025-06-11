@@ -48,10 +48,11 @@ A full-featured medical booking platform with patient/doctor portals, admin dash
 
 ## 🚀 Installation Guide
 
-### Prerequisites
-- Node.js v18+
-- MongoDB Atlas account
-- Git
+## 🛠️🧱 Prerequisites
+
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="18"/> ⚡ **Node.js v18+**
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" width="18"/> 🗄️ **MongoDB Atlas account**
+- <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="18"/> 🔀 **Git**
 
 ### Setup Instructions
 1. Clone the repository:
