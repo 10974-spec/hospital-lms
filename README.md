@@ -144,7 +144,7 @@ CURRENCY=$  # Or your preferred currency symbol
 
 ---
 
-## 🛠️ **Tech Stack Highlights**
+
 <div align="center" style="background-color: #f5f5f5; padding: 20px; border-radius: 10px; margin-top: 30px;">
 
 <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40" height="40" title="JavaScript" />
