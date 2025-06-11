@@ -104,6 +104,42 @@ RAZORPAY_KEY_SECRET=your_razorpay_secret
 
 # 💰 Currency
 CURRENCY=$  # Or your preferred currency symbol
+```
+## 🌐 Live Demo & Contact
+
+🚀 **Experience the live application:**  
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-000000?style=for-the-badge&logo=render&logoColor=white)](https://medicare-6h45.onrender.com)  
+*Hosted on Render.com for your convenience!*
+
+---
+
+### 👨‍💻 **About the Developer**  
+**Emmanuel Nyakoe**  
+[![Email](https://img.shields.io/badge/📧_Email-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:emmanuelnyakoe13@gmail.com)  
+[![Portfolio](https://img.shields.io/badge/🌐_Portfolio-4285F4?style=flat-square&logo=google-chrome&logoColor=white)](https://yourportfolio.com) *← Add your portfolio link!*
+
+---
+
+### 🎉 **Project Completion**  
+✨ **This project represents:**  
+- Months of dedicated development  
+- Countless cups of coffee ☕  
+- Endless debugging sessions 🐛➡️🦋  
+- A passion for creating impactful solutions  
+
+💖 **Special thanks to all contributors, testers, and supporters!**  
+
+📈 **Future plans include:**  
+- Adding more healthcare features  
+- Improving user experience  
+- Expanding to mobile platforms 📱  
+
+---
+
+📢 **Let's connect!** I'm always open to:  
+- 🤝 Collaboration opportunities  
+- 💡 Feedback and suggestions  
+- 🚀 Exciting new projects  
 
 
    
