@@ -75,5 +75,36 @@ cd backend && npm install
 cd admin && npm install
 
 
+## 🔐 Environment Variables Setup
+
+📌 **Important!** Before running the backend, you'll need to create a `.env` file in your backend folder with the following variables:
+
+```bash
+# 📁 backend/.env
+# 🔒 Security Credentials - Keep these secret!
+
+# 🗄️ Database Configuration
+MONGODB_URI=your_mongodb_atlas_connection_string
+
+# ☁️ Cloudinary Configuration (for file uploads)
+CLOUDINARY_NAME=your_cloudinary_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_SECRET_KEY=your_cloudinary_secret_key
+
+# 👑 Admin Credentials
+ADMIN_EMAIL=your_admin@email.com
+ADMIN_PASSWORD=your_secure_password
+
+# 🔑 Authentication
+JWT_SECRET=your_jwt_secret_key
+
+# 💳 Payment Gateway (Razorpay)
+RAZORPAY_KEY_ID=your_razorpay_key
+RAZORPAY_KEY_SECRET=your_razorpay_secret
+
+# 💰 Currency
+CURRENCY=$  # Or your preferred currency symbol
+
+
    
 
