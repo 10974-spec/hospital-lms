@@ -116,8 +116,7 @@ CURRENCY=$  # Or your preferred currency symbol
 ### 👨‍💻 **About the Developer**  
 **Emmanuel Nyakoe**  
 [![Email](https://img.shields.io/badge/📧_Email-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:emmanuelnyakoe13@gmail.com)  
-[![Portfolio](https://img.shields.io/badge/🌐_Portfolio-4285F4?style=flat-square&logo=google-chrome&logoColor=white)](https://yourportfolio.com) *← Add your portfolio link!*
-
+[![Portfolio](https://img.shields.io/badge/🌐_Portfolio-4285F4?style=flat-square&logo=google-chrome&logoColor=white)](https://yourportfolio.com) 
 ---
 
 ### 🎉 **Project Completion**  
