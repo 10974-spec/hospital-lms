@@ -14,7 +14,7 @@ const TopDoctors = () => {
 
   useEffect(() => {
     if (doctors && doctors.length > 0) {
-      setLoading(true);
+      setLoading(false);
     }
   }, [doctors]);
 
