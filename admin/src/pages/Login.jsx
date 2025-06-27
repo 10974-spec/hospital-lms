@@ -3,10 +3,10 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import { AdminContext } from '../context/AdminContext'
 import { DoctorContext } from '../context/DoctorContext'
-
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-
+    const navigate = useNavigate();
     const [state, setState] = useState('Admin')
 
     const [email, setEmail] = useState('')
@@ -29,7 +29,7 @@ const Login = () => {
                 if (data.success) {
                     localStorage.setItem('aToken', data.token)
                     setAToken(data.token)
-                    
+                    navigate('/admin-dashboard');
                 }else{
                     toast.error(data.message)
                 }
@@ -45,7 +45,7 @@ const Login = () => {
                     localStorage.setItem('dToken', data.token)
                     setDToken(data.token)
                     console.log(data.token);
-                    
+                    navigate('/doctor-dashboard');
                 } else {
                     toast.error(data.message)
                 }
